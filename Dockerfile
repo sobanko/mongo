@@ -30,7 +30,7 @@ RUN chmod +x /mongo-entrypoint.sh
 
 EXPOSE 27017
 
-ENTRYPOINT ["/mongo-entrypoint.sh"]
+CMD ["/mongo-entrypoint.sh"]
 
 
 
