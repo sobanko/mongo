@@ -6,11 +6,11 @@ RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
 RUN subscription-manager register --username "{RHEL_ACCOUNT_USERNAME}"  --password `{RHEL_ACCOUNT_PASSWORD_FILE}` --autosubscribe
  
-RUN       yum -y update; yum clean all 
-RUN       yum -y install epel-release; yum clean all 
-RUN       yum -y install mongodb-server; yum clean all 
-RUN       subscription-manager remove --all 
-RUN       subscription-manager unregister
+RUN yum -y update; yum clean all 
+RUN yum -y install epel-release; yum clean all 
+RUN yum -y install mongodb-server; yum clean all 
+RUN subscription-manager remove --all 
+RUN subscription-manager unregister
 
 COPY config/mongodb.conf /mongodb.conf
 
