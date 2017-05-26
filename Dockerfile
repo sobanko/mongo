@@ -4,14 +4,13 @@ MAINTAINER author <author@email.com>
 
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
-COPY su-exec/su-exec /
-
-RUN subscription-manager register --username "{RHEL_ACCOUNT_USERNAME}"  --password `{RHEL_ACCOUNT_PASSWORD_FILE}` --autosubscribe && \
-        yum -y update; yum clean all && \
-        yum -y install epel-release; yum clean all && \
-        yum -y install mongodb-server; yum clean all && \
-        subscription-manager remove --all && \
-        subscription-manager unregister
+RUN subscription-manager register --username "{RHEL_ACCOUNT_USERNAME}"  --password `{RHEL_ACCOUNT_PASSWORD_FILE}` --autosubscribe
+ 
+RUN       yum -y update; yum clean all 
+RUN       yum -y install epel-release; yum clean all 
+RUN       yum -y install mongodb-server; yum clean all 
+RUN       subscription-manager remove --all 
+RUN       subscription-manager unregister
 
 COPY config/mongodb.conf /mongodb.conf
 
@@ -21,8 +20,9 @@ RUN chmod +x /etc/logrotate.d/mongodb
 
 RUN chown mongodb:mongodb /etc/logrotate.d/mongodb
 
-RUN mkdir -p /data/db /data/configdb \
-        && chown -R mongodb:mongodb /data/db /data/configdb
+RUN mkdir -p /data/db /data/configdb
+RUN chown -R mongodb:mongodb /data/db /data/configdb
+
 VOLUME /data/db /data/configdb
 
 COPY mongo-entrypoint.sh /mongo-entrypoint.sh
