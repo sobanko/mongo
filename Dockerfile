@@ -4,7 +4,7 @@ MAINTAINER author <author@email.com>
 
 RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 
-RUN subscription-manager register --username "{RHEL_ACCOUNT_USERNAME}"  --password `{RHEL_ACCOUNT_PASSWORD_FILE}` --autosubscribe
+RUN subscription-manager register --username "<user_name>"  --password "<password>" --autosubscribe
  
 RUN yum -y update; yum clean all 
 RUN yum -y install epel-release; yum clean all 
